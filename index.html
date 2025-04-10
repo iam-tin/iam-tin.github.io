@@ -3,48 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eric Li - Personal Website</title>
-    <meta name="description" content="Eric Li's personal website - Indie hacker who created Morse Code Translator and What Time Is Sunset">
+    <title>Eric Li - Personal Website | Indie Hacker & Web Developer</title>
+    <meta name="description" content="Eric Li's personal website - Indie hacker and web developer who created Morse Code Translator, What Time Is Sunset, and Humanizar Texto">
+    <meta name="keywords" content="Eric Li, indie hacker, web developer, Morse Code Translator, What Time Is Sunset, Humanizar Texto">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
-            color: #333;
-            background-color: #f9f9f9;
+            color: var(--text-color);
+            background-color: var(--background-color);
         }
+
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--primary-color);
         }
+
         .intro {
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            color: var(--text-secondary);
         }
+
         .links {
             margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
+
         .link-item {
-            display: block;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-decoration: none;
-            color: #333;
-            transition: transform 0.2s ease;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            position: relative;
         }
+
         .link-item:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
         }
+
+        .link-logo {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+
+        .link-title {
+            font-size: 1.25rem;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .link-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .info-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .info-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 1000;
+            opacity: 0;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            background: rgba(0,0,0,0.5);
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            background: var(--card-background);
+            margin: 15% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .close-button:hover {
+            color: var(--primary-color);
+        }
+
         .footer {
             margin-top: 3rem;
             text-align: center;
             font-size: 0.9rem;
-            color: #666;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .links {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -53,27 +174,127 @@
     <p class="intro">Hey there! 👋 I'm a full-time <strong>indie hacker</strong> building useful tools on the web.</p>
     
     <div class="links">
-        <h2>My Projects & Links</h2>
         <a href="https://bento.me/ericli" class="link-item" target="_blank">
-            <h3>My Personal Page (Bento)</h3>
-            <p>Check out my Bento profile for more about me</p>
+            <img src="https://bento.me/favicon.ico" alt="Bento Logo" class="link-logo">
+            <h3 class="link-title">My Personal Page (Bento)</h3>
+            <p class="link-description">Check out my Bento profile for more about me</p>
+            <button class="info-button" data-site="bento">i</button>
         </a>
         <a href="https://morsecode-translator.app" class="link-item" target="_blank">
-            <h3>Morse Code Translator</h3>
-            <p>A handy tool to convert text to Morse code and back - super simple to use!</p>
+            <img src="https://morsecode-translator.app/favicon.ico" alt="Morse Code Translator Logo" class="link-logo">
+            <h3 class="link-title">Morse Code Translator</h3>
+            <p class="link-description">A handy tool to convert text to Morse code and back - super simple to use!</p>
+            <button class="info-button" data-site="morse">i</button>
         </a>
         <a href="https://whattimeissunset.net" class="link-item" target="_blank">
-            <h3>What Time Is Sunset</h3>
-            <p>Planning your evening? Find out exactly when the sun sets in your location!</p>
+            <img src="https://whattimeissunset.net/favicon.ico" alt="What Time Is Sunset Logo" class="link-logo">
+            <h3 class="link-title">What Time Is Sunset</h3>
+            <p class="link-description">Planning your evening? Find out exactly when the sun sets in your location!</p>
+            <button class="info-button" data-site="sunset">i</button>
+        </a>
+        <a href="https://humanizartexto.app" class="link-item" target="_blank">
+            <img src="https://humanizartexto.app/favicon.ico" alt="Humanizar Texto Logo" class="link-logo">
+            <h3 class="link-title">Humanizar Texto</h3>
+            <p class="link-description">Transform AI-generated text into natural, human-like content that bypasses AI detectors.</p>
+            <button class="info-button" data-site="humanizar">i</button>
         </a>
         <a href="https://producthunt.com/@eric_li" class="link-item" target="_blank">
-            <h3>Product Hunt Profile</h3>
-            <p>See my projects featured on Product Hunt</p>
+            <img src="https://ph-static.imgix.net/ph-logo-1.png" alt="Product Hunt Logo" class="link-logo">
+            <h3 class="link-title">Product Hunt Profile</h3>
+            <p class="link-description">See my projects featured on Product Hunt</p>
+            <button class="info-button" data-site="ph">i</button>
         </a>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
     </div>
 
     <div class="footer">
         &copy; 2025 Eric Li. All rights reserved.
     </div>
+
+    <script>
+        const siteInfo = {
+            bento: {
+                title: "Bento Profile",
+                description: "A comprehensive profile showcasing my work, interests, and achievements as an indie hacker.",
+                url: "https://bento.me/ericli"
+            },
+            morse: {
+                title: "Morse Code Translator",
+                description: "A user-friendly web application that converts text to Morse code and vice versa. Perfect for learning Morse code or quick translations.",
+                url: "https://morsecode-translator.app"
+            },
+            sunset: {
+                title: "What Time Is Sunset",
+                description: "A practical tool that provides accurate sunset times for any location worldwide. Great for photographers, outdoor enthusiasts, and anyone planning their day.",
+                url: "https://whattimeissunset.net"
+            },
+            humanizar: {
+                title: "Humanizar Texto",
+                description: "An advanced AI text humanization tool that transforms machine-generated content into natural, human-like text that bypasses AI detection systems.",
+                url: "https://humanizartexto.app"
+            },
+            ph: {
+                title: "Product Hunt Profile",
+                description: "My Product Hunt profile showcasing various projects and tools I've developed as an indie hacker.",
+                url: "https://producthunt.com/@eric_li"
+            }
+        };
+
+        let hoverTimeout;
+        const HOVER_DELAY = 1000; // 1秒延迟
+
+        document.querySelectorAll('.info-button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                hoverTimeout = setTimeout(() => {
+                    const site = button.getAttribute('data-site');
+                    showInfo(site);
+                }, HOVER_DELAY);
+            });
+
+            button.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+            });
+        });
+
+        function showInfo(site) {
+            const info = siteInfo[site];
+            const modal = document.getElementById('infoModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = `
+                <h2>${info.title}</h2>
+                <p>${info.description}</p>
+                <p><strong>URL:</strong> <a href="${info.url}" target="_blank">${info.url}</a></p>
+            `;
+            
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('show');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('infoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // 添加ESC键关闭功能
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
+</html> 
 </html> 
